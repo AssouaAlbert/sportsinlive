@@ -48,12 +48,64 @@ export default defineConfig(({ mode }) => {
       },
     },
     define: {
+
+      // Environment Variables
       "process.env.NODE_ENV": '"production"',
       "process.env.REACT_APP_API_URL": JSON.stringify(apiURL),
       "process.env.VITE_API_URL": JSON.stringify(apiURL),
       "process.env.VITE_THEME": JSON.stringify(theme),
       "process.env.VITE_APP_NAME": JSON.stringify(process.env.VITE_APP_NAME),
       "process.env.VITE_LOGGING_LEVEL": JSON.stringify(loggingLevel),
+
+      // MUI Color Variables
+      "process.env.MUI_PRIMARY_COLOR": JSON.stringify(
+        process.env.MUI_PRIMARY_COLOR
+      ),
+      "process.env.MUI_SECONDARY_COLOR": JSON.stringify(
+        process.env.MUI_SECONDARY_COLOR
+      ),
+      "process.env.MUI_TERTIARY_COLOR": JSON.stringify(
+        process.env.MUI_TERTIARY_COLOR
+      ),
+      "process.env.MUI_BACKGROUND_COLOR": JSON.stringify(
+        process.env.MUI_BACKGROUND_COLOR
+      ),
+      "process.env.MUI_NEUTRAL_COLOR": JSON.stringify(
+        process.env.MUI_NEUTRAL_COLOR
+      ),
+      "process.env.MUI_BLACK_COLOR": JSON.stringify(
+        process.env.MUI_BLACK_COLOR
+      ),
+      "process.env.MUI_GREY_COLOR": JSON.stringify(process.env.MUI_GREY_COLOR),
+      "process.env.MUI_WHITE_COLOR": JSON.stringify(
+        process.env.MUI_WHITE_COLOR
+      ),
+      "process.env.MUI_HIGHLIGHT_COLOR": JSON.stringify(
+        process.env.MUI_HIGHLIGHT_COLOR
+      ),
+      "process.env.MUI_SUCCESS_COLOR": JSON.stringify(
+        process.env.MUI_SUCCESS_COLOR
+      ),
+      "process.env.MUI_WARNING_COLOR": JSON.stringify(
+        process.env.MUI_WARNING_COLOR
+      ),
+      "process.env.MUI_ERROR_COLOR": JSON.stringify(
+        process.env.MUI_ERROR_COLOR
+      ),
+      "process.env.MUI_TEXT_COLOR": JSON.stringify(
+        process.env.MUI_TEXT_PRIMARY_COLOR
+      ),
+      "process.env.MUI_ACTION_COLOR": JSON.stringify(
+        process.env.MUI_ACTION_COLOR
+      ),
+      "process.env.MUI_DIVIDER_COLOR": JSON.stringify(
+        process.env.MUI_DIVIDER_COLOR
+      ),
+      "process.env.MUI_FONT_PRIMARY": JSON.stringify(process.env.MUI_FONT_PRIMARY),
+      "process.env.MUI_FONT_SECONDARY": JSON.stringify(process.env.MUI_FONT_SECONDARY),
+      "process.env.MUI_FONT_MONTSERRAT": JSON.stringify(process.env.MUI_FONT_MONTSERRAT),
+      "process.env.MUI_FONT_LATO": JSON.stringify(process.env.MUI_FONT_LATO),
+      "process.env.MUI_FONT_INTER": JSON.stringify(process.env.MUI_FONT_INTER),
     },
   };
 });
