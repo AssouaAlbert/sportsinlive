@@ -1,5 +1,6 @@
 import {
-  PaletteColorOptions,
+  PaletteColor,
+  SimplePaletteColorOptions,
   TypeAction,
   TypeBackground,
   TypeText,
@@ -7,8 +8,8 @@ import {
 import chroma from "chroma-js";
 
 export const createColorPalette = (
-  baseColor: string // Default to a shade of blue if no base color is provided  
-): PaletteColorOptions & Record<number, string> => {
+  baseColor: string // Default to a shade of blue if no base color is provided
+): SimplePaletteColorOptions | PaletteColor => {
   const scale = chroma
     .scale([
       chroma(baseColor).brighten(2),
@@ -36,10 +37,10 @@ export const createColorPalette = (
 
 export const createBackgroundColorPalette = (
   baseColor: string
-): TypeBackground & Record<number, string> => {
+): TypeBackground => {
   return {
     default: baseColor,
-    paper: chroma(baseColor).brighten(0.3).hex(),
+    paper: chroma(baseColor).darken(0.2).hex(),
   };
 };
 

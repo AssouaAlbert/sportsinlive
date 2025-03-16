@@ -1,10 +1,6 @@
 import {
   PaletteOptions,
-  Color,
-  TypeBackground,
   PaletteColorOptions,
-  TypeText,
-  TypeAction,
   ThemeOptions,
   PaletteMode,
 } from "@mui/material";
@@ -17,20 +13,49 @@ import {
 import { TypographyOptions } from "@mui/material/styles/createTypography";
 
 declare module "@mui/material/styles" {
+  interface PaletteColor {
+    100?: string;
+    200?: string;
+    300?: string;
+    400?: string;
+    500?: string;
+    600?: string;
+    700?: string;
+    800?: string;
+    900?: string;
+    primary?: string;
+    disabled?: string;
+    secondary?: string;
+  }
+  interface SimplePaletteColorOptions {
+    100?: string;
+    200?: string;
+    300?: string;
+    400?: string;
+    500?: string;
+    600?: string;
+    700?: string;
+    800?: string;
+    900?: string;
+    primary?: string;
+    disabled?: string;
+    secondary?: string;
+  }
+
+  interface Palette {
+    neutral: PaletteColor;
+    black: PaletteColor;
+    tertiary: PaletteColor;
+    white: PaletteColor;
+    highlight: PaletteColor;
+  }
+
   interface PaletteOptions {
-    background?: Partial<TypeBackground>;
-    neutral: PaletteColorOptions & Record<number, string>;
-    black: PaletteColorOptions & Record<number, string>;
-    tertiary: PaletteColorOptions & Record<number, string>;
-    grey?: Partial<Color>;
-    white: PaletteColorOptions & Record<number, string>;
-    highlight: PaletteColorOptions & Record<number, string>;
-    success?: PaletteColorOptions;
-    warning?: PaletteColorOptions;
-    error?: PaletteColorOptions;
-    text?: Partial<TypeText>;
-    action?: Partial<TypeAction>;
-    divider?: string;
+    neutral?: PaletteColorOptions;
+    black?: PaletteColorOptions;
+    tertiary?: PaletteColorOptions;
+    white?: PaletteColorOptions;
+    highlight?: PaletteColorOptions;
   }
 }
 
@@ -61,102 +86,92 @@ const theme = (mode: PaletteMode): ThemeOptions => {
   };
 
   const typography: TypographyOptions = {
-    fontFamily: `"${"#" + import.meta.env.VITE_MUI_FONT_INTER}", "${
-      "#" + import.meta.env.VITE_MUI_FONT_PRIMARY
+    fontFamily: `"${import.meta.env.VITE_MUI_FONT_INTER}", "${
+      import.meta.env.VITE_MUI_FONT_PRIMARY
     }", "Helvetica", "Arial", sans-serif`,
 
     h1: {
-      fontFamily: `"${
-        "#" + import.meta.env.VITE_MUI_FONT_PRIMARY
-      }", sans-serif`,
+      fontFamily: `"${import.meta.env.VITE_MUI_FONT_PRIMARY}", sans-serif`,
       fontSize: "3rem",
       fontWeight: 700,
       lineHeight: 1.2,
-      color: "#" + import.meta.env.MUI_PRIMARY_COLOR,
+      color: import.meta.env.MUI_PRIMARY_COLOR,
     },
     h2: {
-      fontFamily: `"${
-        "#" + import.meta.env.VITE_MUI_FONT_PRIMARY
-      }", sans-serif`,
+      fontFamily: `"${import.meta.env.VITE_MUI_FONT_PRIMARY}", sans-serif`,
       fontSize: "2.25rem",
       fontWeight: 600,
       lineHeight: 1.3,
-      color: "#" + import.meta.env.MUI_PRIMARY_COLOR,
+      color: import.meta.env.MUI_PRIMARY_COLOR,
     },
     h3: {
-      fontFamily: `"${
-        "#" + import.meta.env.VITE_MUI_FONT_SECONDARY
-      }", sans-serif`,
+      fontFamily: `"${import.meta.env.VITE_MUI_FONT_SECONDARY}", sans-serif`,
       fontSize: "1.75rem",
       fontWeight: 600,
       lineHeight: 1.4,
-      color: "#" + import.meta.env.MUI_SECONDARY_COLOR,
+      color: import.meta.env.MUI_SECONDARY_COLOR,
     },
     h4: {
-      fontFamily: `"${
-        "#" + import.meta.env.VITE_MUI_FONT_MONTSERRAT
-      }", sans-serif`,
+      fontFamily: `"${import.meta.env.VITE_MUI_FONT_MONTSERRAT}", sans-serif`,
       fontSize: "1.5rem",
       fontWeight: 500,
       lineHeight: 1.4,
-      color: "#" + import.meta.env.MUI_HIGHLIGHT_COLOR,
+      color: import.meta.env.MUI_HIGHLIGHT_COLOR,
     },
     h5: {
-      fontFamily: `"${"#" + import.meta.env.VITE_MUI_FONT_LATO}", sans-serif`,
+      fontFamily: `"${import.meta.env.VITE_MUI_FONT_LATO}", sans-serif`,
       fontSize: "1.25rem",
       fontWeight: 500,
       lineHeight: 1.5,
-      color: "#" + import.meta.env.MUI_TERTIARY_COLOR,
+      color: import.meta.env.MUI_TERTIARY_COLOR,
     },
     h6: {
-      fontFamily: `"${"#" + import.meta.env.VITE_MUI_FONT_LATO}", sans-serif`,
+      fontFamily: `"${import.meta.env.VITE_MUI_FONT_LATO}", sans-serif`,
       fontSize: "1rem",
       fontWeight: 400,
       lineHeight: 1.5,
-      color: "#" + import.meta.env.MUI_WARNING_COLOR,
+      color: import.meta.env.MUI_WARNING_COLOR,
     },
 
     body1: {
-      fontFamily: `"${"#" + import.meta.env.VITE_MUI_FONT_INTER}", sans-serif`,
+      fontFamily: `"${import.meta.env.VITE_MUI_FONT_INTER}", sans-serif`,
       fontSize: "1rem",
       fontWeight: 400,
       lineHeight: 1.6,
-      color: "#" + import.meta.env.MUI_BLACK_COLOR,
+      color: import.meta.env.MUI_BLACK_COLOR,
     },
     body2: {
-      fontFamily: `"${"#" + import.meta.env.VITE_MUI_FONT_INTER}", sans-serif`,
+      fontFamily: `"${import.meta.env.VITE_MUI_FONT_INTER}", sans-serif`,
       fontSize: "0.875rem",
       fontWeight: 400,
       lineHeight: 1.6,
-      color: "#" + import.meta.env.MUI_GREY_COLOR,
+      color: import.meta.env.MUI_GREY_COLOR,
     },
 
     button: {
       textTransform: "none",
-      fontFamily: `"${
-        "#" + import.meta.env.VITE_MUI_FONT_PRIMARY
-      }", sans-serif`,
+      fontFamily: `"${import.meta.env.VITE_MUI_FONT_PRIMARY}", sans-serif`,
       fontWeight: 500,
       fontSize: "1rem",
-      color: "#" + import.meta.env.MUI_BACKGROUND_COLOR,
+      color: import.meta.env.MUI_BACKGROUND_COLOR,
     },
 
     caption: {
-      fontFamily: `"${"#" + import.meta.env.VITE_MUI_FONT_LATO}", sans-serif`,
+      fontFamily: `"${import.meta.env.VITE_MUI_FONT_LATO}", sans-serif`,
       fontSize: "0.75rem",
       fontWeight: 300,
       lineHeight: 1.4,
-      color: "#" + import.meta.env.MUI_BLACK_COLOR,
+      color: import.meta.env.MUI_BLACK_COLOR,
     },
 
     overline: {
-      fontFamily: `"${"#" + import.meta.env.VITE_MUI_FONT_LATO}", sans-serif`,
+      fontFamily: `"${import.meta.env.VITE_MUI_FONT_LATO}", sans-serif`,
       fontSize: "0.625rem",
       fontWeight: 500,
       lineHeight: 1.2,
       letterSpacing: "0.1em",
       textTransform: "uppercase",
-      color: "#" + import.meta.env.MUI_GREY_COLOR,
+      color: import.meta.env.MUI_GREY_COLOR,
     },
   };
 
