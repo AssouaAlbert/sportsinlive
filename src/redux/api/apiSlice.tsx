@@ -3,30 +3,26 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 // Define the API slice
 export const apiSlice = createApi({
-  reducerPath: 'api', // The key in the Redux store
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://localhost:8083' }), // Base URL for the API
+  reducerPath: 'api', // Key in the Redux store
+  baseQuery: fetchBaseQuery({ 
+    baseUrl: 'http://localhost:8083', // Ensure HTTP, not HTTPS for localhost
+    credentials: 'include', // Sends cookies if the backend uses session-based auth
+  }),
   tagTypes: ['User'], // Optional: Define tag types for cache invalidation
   endpoints: (builder) => ({
-    // Example: Fetch users
-    getUsers: builder.query({
-      query: () => '/users', // API endpoint
-    }),
-
-    // Example: Fetch a single user by ID
-    getUserById: builder.query({
-      query: (id) => `/users/${id}`,
-    }),
-
-    // Example: Create a new user
-    createUser: builder.mutation({
-      query: (userData) => ({
-        url: '/users',
+    // Login user
+    loginUser: builder.mutation({
+      query: (credentials) => ({
+        url: '/login', // Your login endpoint
         method: 'POST',
-        body: userData,
+        body: credentials, // { username: '...', password: '...' }
+        headers: {
+          'Content-Type': 'application/json',
+        },
       }),
     }),
   }),
 });
 
 // Export auto-generated hooks
-export const { useGetUsersQuery, useGetUserByIdQuery, useCreateUserMutation } = apiSlice;
+export const { useLoginUserMutation } = apiSlice;

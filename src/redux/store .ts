@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./rootReducer";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // Uses localStorage for persistence
+import { apiSlice } from "./api/apiSlice";
 
 // Persist configuration
 const persistConfig = {
@@ -23,7 +24,7 @@ export const store = configureStore({
         ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"], // Ignore these actions for serialization checks
         ignoredPaths: ["_persist"], // Ignore the Redux Persist state key
       },
-    }),
+    }).concat(apiSlice.middleware), // Add any additional middleware, such as RTK Query
   devTools: process.env.NODE_ENV !== "production", // Enable Redux DevTools in development mode
 });
 
