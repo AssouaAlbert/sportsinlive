@@ -1,4 +1,4 @@
-import {RootState} from '../store';
+import { RootState } from "../rootReducer";
 
 const selectLoginForm = (state: RootState) => state.login; // Select the login form slice from the state
 export const selectEmail = (state: RootState) => selectLoginForm(state).email; // Selector for email

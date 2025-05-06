@@ -22,7 +22,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"], // Ignore these actions for serialization checks
-        ignoredPaths: ["_persist"], // Ignore the Redux Persist state key
+        ignoredPaths: ["theme"], // Ignore the Redux Persist state key
       },
     }).concat(apiSlice.middleware), // Add any additional middleware, such as RTK Query
   devTools: process.env.NODE_ENV !== "production", // Enable Redux DevTools in development mode

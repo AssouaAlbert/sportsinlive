@@ -4,6 +4,7 @@ const initialState = {
   firstName: "",
   lastName: "",
   email: "",
+  username: "",
   password: "",
   confirmPassword: "",
 };
@@ -27,15 +28,18 @@ const signupFormSlice = createSlice({
     setConfirmPassword: (state, action) => {
       state.confirmPassword = action.payload;
     },
+    setUsername: (state, action) => {
+      state.username = action.payload;
+    },
     resetForm: () => initialState,
   },
 });
-
 
 export const {
   setFirstName,
   setLastName,
   setEmail,
+  setUsername,
   setPassword,
   setConfirmPassword,
   resetForm,

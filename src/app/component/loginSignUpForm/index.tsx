@@ -15,8 +15,18 @@ import {
 import { Visibility, VisibilityOff, Facebook, Twitter, Google, Instagram } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 import ActionLink from "../../utils/component/actionLink";
+import { useLoginUserMutation } from "../../../redux/api/apiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import selectLoginForm from "../../../redux/loginForm/loginInFormSelector";
+import { setEmail, setPassword } from "../../../redux/loginForm/loginInFormSlice";
+import Form from "../../utils/component/styled/form/form.styled";
 
 const LoginSignupForm: React.FC = () => {
+    const [loginUser, { isLoading,
+        //  error, data
+         }] = useLoginUserMutation();
+    const dispatch = useDispatch();
+    const { email, password } = useSelector(selectLoginForm);
     const [isLogin, setIsLogin] = useState(true);
     const [showLoginPassword, setShowLoginPassword] = useState(false);
     const [showSignUpPassword, setShowSignInPassword] = useState(false);
@@ -24,8 +34,26 @@ const LoginSignupForm: React.FC = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
     console.log(isMobile)
-
-
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        console.log("Input changed:", event.target.name, event.target.value); // Debugging line
+        const { name, value } = event.target;
+        if (name === "email") {
+            dispatch(setEmail(value));
+        } else if (name === "password") {
+            dispatch(setPassword(value));
+        }
+    }
+    const handleLogin = (): void => {
+        loginUser({ username: email, password })
+            .unwrap()
+            .then((response) => {
+                console.log("Login successful:", response);
+            })
+            .catch((error) => {
+                console.error("Login failed:", error);
+                console.error("Error:", error); // Log the error message for debugging
+            });
+    }
 
     return (
         <Grid
@@ -44,6 +72,7 @@ const LoginSignupForm: React.FC = () => {
 
         >
             <Box
+                id="login-form"
                 sx={{
                     width: "100%",
                     maxWidth: 400,
@@ -58,40 +87,53 @@ const LoginSignupForm: React.FC = () => {
                     Sign In
                 </Typography>
 
-                <TextField label="Email" fullWidth variant="outlined" sx={{ mt: 2, input: { color: 'white' } }} />
+                <Form>
 
-                <TextField
-                    label="Password"
-                    type={showLoginPassword ? "text" : "password"}
-                    fullWidth
-                    variant="outlined"
-                    sx={{ mt: 2, input: { color: 'white' } }}
-                    slotProps={{
-                        input: {
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IconButton edge="end" onClick={() => setShowLoginPassword(!showLoginPassword)}>
-                                        {showLoginPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
-                            ),
-                        }
-                    }}
-                />
+                    <TextField label="Email" name="email"
+                        onChange={handleInputChange}  // Handle input change for email
+                        value={email}
+                        fullWidth variant="outlined" sx={{ mt: 2, input: { color: 'white' } }} />
 
-                <Box sx={{ display: "flex", justifyContent: "space-between", mt: 1, alignItems: "center" }}>
-                    <FormControlLabel control={<Checkbox />} label={<Typography>Remember me</Typography>} />
-                    <Link href="#"><ActionLink>
-                        <Typography >
-                            Forgot Password?
-                        </Typography>
-                    </ActionLink>
-                    </Link>
-                </Box>
+                    <TextField
+                        label="Password"
+                        type={showLoginPassword ? "text" : "password"}
+                        fullWidth
+                        name="password"
+                        onChange={handleInputChange}
+                        value={password}
+                        variant="outlined"
+                        sx={{ mt: 2, input: { color: 'white' } }}
+                        slotProps={{
+                            input: {
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton edge="end" onClick={() => setShowLoginPassword(!showLoginPassword)}>
+                                            {showLoginPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }
+                        }}
+                    />
 
-                <Button variant="contained" color="primary" fullWidth sx={{ mt: 2, borderRadius: 2 }}>
-                    Log in
-                </Button>
+                    <Box sx={{ display: "flex", justifyContent: "space-between", mt: 1, alignItems: "center" }}>
+                        <FormControlLabel control={<Checkbox />} label={<Typography>Remember me</Typography>} />
+                        <Link href="#"><ActionLink>
+                            <Typography >
+                                Forgot Password?
+                            </Typography>
+                        </ActionLink>
+                        </Link>
+                    </Box>
+
+                    <Button
+                        disabled={isLoading}
+                        type="submit"
+                        onClick={handleLogin} variant="contained" color="primary" fullWidth sx={{ mt: 2, borderRadius: 2 }}>
+                        Log in
+                    </Button>
+                </Form>
+
 
                 <Typography variant="body2" align="center" sx={{ mt: 2 }}>
                     Or Sign in with
