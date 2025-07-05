@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { signInWithEmailAndPassword, signInWithRedirect } from 'firebase/auth';
 import {
   auth,
   googleAuthProvider,
@@ -6,15 +6,15 @@ import {
   twitterAuthProvider,
 } from '.';
 
-export const signInWithGooglePopUp = () =>
-  signInWithPopup(auth, googleAuthProvider);
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, googleAuthProvider);
 
 export const signInWithEmail = (email: string, password: string) =>
   signInWithEmailAndPassword(auth, email, password);
 
-export const signInWithFacebookPopUp = () =>
-  signInWithPopup(auth, facebookAuthProvider);
+export const signInWithFacebookRedirect = () =>
+  signInWithRedirect(auth, facebookAuthProvider);
 
-export const signInWithTwitterPopUp = () =>
-  signInWithPopup(auth, twitterAuthProvider);
+export const signInWithTwitterRedirect = () =>
+  signInWithRedirect(auth, twitterAuthProvider);
 

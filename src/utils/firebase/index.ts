@@ -5,7 +5,9 @@ import {
   getAuth,
   GoogleAuthProvider,
 FacebookAuthProvider,
-TwitterAuthProvider
+TwitterAuthProvider,
+signInWithRedirect,
+signInWithEmailAndPassword
 } from 'firebase/auth';
 
 // Your web app's Firebase configuration
@@ -21,9 +23,11 @@ const firebaseConfig = {
 };
 
 export const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);
-export const analytics = getAnalytics(app);
 
+console.log('Firebase app initialized:', app);
+
+export const auth = getAuth(app);
+console.log('Firebase Authentication initialized:', auth);
 
 export const googleAuthProvider = new GoogleAuthProvider();
 export const twitterAuthProvider = new TwitterAuthProvider();
@@ -42,3 +46,18 @@ facebookAuthProvider.setCustomParameters({
 });
 
 
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(getAuth(), googleAuthProvider);
+
+export const signInWithEmail = (email: string, password: string) =>
+  signInWithEmailAndPassword(getAuth(), email, password);
+
+export const signInWithFacebookRedirect = () =>
+  signInWithRedirect(getAuth(), facebookAuthProvider);
+
+export const signInWithTwitterRedirect = () =>
+  signInWithRedirect(getAuth(), twitterAuthProvider);
+
+
+export const analytics = getAnalytics(app);
+console.log('Firebase Analytics initialized:', analytics);

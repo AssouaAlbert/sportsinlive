@@ -5,6 +5,7 @@ import App from './App.tsx'
 import { Provider } from 'react-redux'
 import store from './redux/store .ts'
 import { CssBaseline } from '@mui/material'
+import './utils/firebase';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
