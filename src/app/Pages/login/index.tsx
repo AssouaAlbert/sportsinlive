@@ -1,5 +1,6 @@
 import Grid from '@mui/material/Grid2'
-import LoginSignupForm from '../../component/loginSignUpForm';
+import SignInAndSignUp from '../../component/signInAndSignUp';
+
 
 const LoginSignUp: React.FC = () => {
     return (
@@ -21,7 +22,7 @@ const LoginSignUp: React.FC = () => {
 
         >
             <Grid size={12}>
-                <LoginSignupForm />
+                <SignInAndSignUp />
             </Grid>
         </Grid>
     );
